@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20160321
+FROM ubuntu:14.04
 MAINTAINER sameer@damagehead.com
 
 ENV OPENFIRE_VERSION=4.0.2 \
@@ -6,11 +6,17 @@ ENV OPENFIRE_VERSION=4.0.2 \
     OPENFIRE_DATA_DIR=/var/lib/openfire \
     OPENFIRE_LOG_DIR=/var/log/openfire
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update \
- && apt-get install -y software-properties-common python-software-properties \
+ && apt-get install -y software-properties-common \
  && add-apt-repository ppa:openjdk-r/ppa \
  && apt-get update \
- && apt-get install -y openjdk-8-jre openjdk-7-jre \
+ && apt-get install -y \
+   ca-certificates \
+   openjdk-7-jre \
+   openjdk-8-jre \
+   wget \
  && update-java-alternatives --jre-headless -s java-1.8.0-openjdk-amd64 \
  && wget "http://download.igniterealtime.org/openfire/openfire_${OPENFIRE_VERSION}_all.deb" -O /tmp/openfire_${OPENFIRE_VERSION}_all.deb \
  && dpkg -i /tmp/openfire_${OPENFIRE_VERSION}_all.deb \
