@@ -10,16 +10,34 @@ with --userland-proxy=false
 
 # Getting started
 
-## Installation
+## Download
 
 ```bash
-docker build -t openfire github.com:sensorii/docker-openfire
+git clone https://github.com/sensorii/docker-openfire
+cd docker-openfire
+```
+
+## Configure
+
+Edit Dockerfile, update OPENFIRE_PLUGINS with comma-separated list of names of
+[Openfire Plugins](http://www.igniterealtime.org/projects/openfire/plugins.jsp)
+to install.  Example:
+
+```
+ENV OPENFIRE_PLUGINS=ofmeet,stunserver
+```
+
+## Build
+
+```bash
+docker build -t openfire .
 ```
 
 ## Quickstart
 
 ```bash
-docker run --name openfire -d --restart=always \
+docker run -d --restart=always \
+  --name openfire \
   --net=host \
   --volume /srv/docker/openfire:/var/lib/openfire \
   openfire

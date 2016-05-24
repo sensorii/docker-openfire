@@ -1,11 +1,10 @@
 FROM ubuntu:14.04
-MAINTAINER sameer@damagehead.com
 
-ENV OPENFIRE_VERSION=4.0.2 \
-    OPENFIRE_PLUGINS=ofmeet,stunserver \
-    OPENFIRE_USER=openfire \
-    OPENFIRE_DATA_DIR=/var/lib/openfire \
-    OPENFIRE_LOG_DIR=/var/log/openfire
+ENV OPENFIRE_VERSION=4.0.2
+ENV OPENFIRE_PLUGINS=ofmeet,stunserver
+ENV OPENFIRE_USER=openfire
+ENV OPENFIRE_DATA_DIR=/var/lib/openfire
+ENV OPENFIRE_LOG_DIR=/var/log/openfire
 
 ENV DEBIAN_FRONTEND noninteractive
 
