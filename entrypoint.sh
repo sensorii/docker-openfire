@@ -51,6 +51,16 @@ initialize_log_dir() {
   chown -R ${OPENFIRE_USER}:${OPENFIRE_USER} ${OPENFIRE_LOG_DIR}
 }
 
+initialize_plugins() {
+    PLUGIN_URL='https://www.igniterealtime.org/projects/openfire/plugins'
+    for P in $(echo ${OPENFIRE_PLUGINS} | sed -e 's/,/ /')
+    do
+        if [[ ! -f "${OPENFIRE_DATA_DIR}/plugins/${P}.jar" ]]; then
+            wget "${PLUGIN_URL}/${P}.jar" -O "${OPENFIRE_DATA_DIR}/plugins/${P}.jar"
+        fi
+    done
+}
+
 # allow arguments to be passed to openfire launch
 if [[ ${1:0:1} = '-' ]]; then
   EXTRA_ARGS="$@"
@@ -60,6 +70,7 @@ fi
 rewire_openfire
 initialize_data_dir
 initialize_log_dir
+initialize_plugins
 
 # default behaviour is to launch openfire
 if [[ -z ${1} ]]; then

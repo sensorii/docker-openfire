@@ -1,3 +1,36 @@
+`Dockerfile` to create a [Docker](https://www.docker.com/) container image for
+[Openfire](http://www.igniterealtime.org/projects/openfire/)  with
+configuration options for easy install of Openfire plugins.
+
+The OpenFire Meetings plugin uses a large number of ports.  For better
+performance publishing a large port range, configure docker daemon to start
+with --userland-proxy=false
+[Docker Networking Guide](https://docs.docker.com/v1.8/articles/networking/#binding-ports)
+
+
+# Getting started
+
+## Installation
+
+```bash
+docker build -t openfire github.com:sensorii/docker-openfire
+```
+
+## Quickstart
+
+```bash
+docker run --name openfire -d --restart=always \
+  --net=host \
+  --volume /srv/docker/openfire:/var/lib/openfire \
+  openfire
+```
+
+See details from the original:
+
+
+# ORIGINAL from sameersbn/openfire
+
+
 [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/openfire/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/openfire)
 
 # sameersbn/openfire:4.0.2-1

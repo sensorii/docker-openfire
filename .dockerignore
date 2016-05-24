@@ -1,3 +1,7 @@
-VERSION
-README.md
+.git
 Changelog.md
+LICENSE
+Makefile
+README.md
+VERSION
+docker-compose.yml
